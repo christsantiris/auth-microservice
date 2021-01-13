@@ -5,7 +5,7 @@ export abstract class BaseService<TModel> {
   public model: Model<TModel & Document>;
 
   constructor(public readonly connection: Connection, protected readonly schema: Schema, protected readonly collectionName: string) {
-    this.model = this.connection.model<TModel & Document>(this.collectionName, this.schema);
+    this.model = this.connection.model<any>(this.collectionName, this.schema);
   }
 
   public async create(document: TModel, options?: any): Promise<TModel> {
