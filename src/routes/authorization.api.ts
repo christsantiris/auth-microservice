@@ -4,7 +4,23 @@ export default function (app, express, db) {
   const router = express.Router();
 
   router.get('/', async(req, res) => {
-    res.send('I am the / route');
+    const authToken = req.headers.authorization;
+
+    try {
+      const response = await db.services.authorizationservice.checkAuth(authToken);
+      res.json(response);
+    } catch (err) {
+
+    }
+  });
+
+  router.post('/', async(req, res) => {
+    try {
+      const response = await db.services.authorizationservice.createAuth(req.body);
+      res.json(response);
+    } catch (err) {
+
+    }
   });
   return router;
 }

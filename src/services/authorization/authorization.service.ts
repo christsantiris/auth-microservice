@@ -14,7 +14,7 @@ export default class AuthorizationService extends BaseService<any> {
   public async checkAuth(authToken: any) {
     const decodedToken = await this.apiHelpers.decodeToken(authToken);
 
-    const authorization = await this.model.findOne({ appName: decodedToken[1] });
+    const authorization = await this.model.findOne({ appName: decodedToken[0] });
 
     if (authorization && decodedToken[1] === authorization.apiKey) {
       return {
